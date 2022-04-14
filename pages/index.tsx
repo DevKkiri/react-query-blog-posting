@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import { Fragment } from "react";
 import Link from "next/link";
@@ -16,18 +16,19 @@ const getPosts = async () => {
   return data;
 };
 
+const addPost = async () => {
+  const { data } = await axios.post<Post>("http://localhost:5000/posts");
+};
+
 const Home: NextPage = () => {
+  const queryClient = useQueryClient();
+
   const {
     data: posts,
     isLoading,
     isError,
     error,
-  } = useQuery<Post[], Error>("posts", getPosts, {
-    staleTime: 3 * 1000,
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
-    refetchInterval: false,
-  });
+  } = useQuery<Post[], Error>("posts", getPosts);
 
   if (isError) {
     return <div>{error.message}</div>;
@@ -42,6 +43,14 @@ const Home: NextPage = () => {
 
         <Link href="/dependent">
           <a style={{ marginRight: "1rem" }}>Dependent Queries Page</a>
+        </Link>
+
+        <Link href="/paginated">
+          <a style={{ marginRight: "1rem" }}>Paginated Queries Page</a>
+        </Link>
+
+        <Link href="/infinite">
+          <a style={{ marginRight: "1rem" }}>Infinite Queries Page</a>
         </Link>
       </nav>
 
