@@ -66,5 +66,22 @@
       "nickname": "끼리끼리",
       "postId": 3
     }
+  ],
+  "todos": [
+    {
+      "todo": "리액트 쿼리 포스팅 마무리하기",
+      "done": false,
+      "id": 1
+    },
+    {
+      "todo": "네트워크 탭을 열어서 확인해봅시다",
+      "done": false,
+      "id": 2
+    },
+    {
+      "todo": "setQueryData로 변경 후!!",
+      "done": false,
+      "id": 3
+    }
   ]
 }
